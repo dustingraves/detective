@@ -5,19 +5,28 @@ var getFile = require('./getFile');
 var _ = require('underscore');
 var investigation = getFile.processArgs(process);
 
-var internal = exports.internal = {};
+//var internal = exports.internal = {};
 
+//Build Graph
 var graph = _.reduce(investigation, addToGraph, {});
 
-function addToGraph(acc, witnessAccount) {
+//Find start and end vertices
+var path = rootEnd();
 
-    // acc here is the graph we are producing, acc = accumulator
+//Follow each start to each end
+_.each(path.start, function(start){
+    _.each(path.end, function(end){
+        console.log(findAllPaths(graph, start, end, []));
+    })
+});
+
+
+function addToGraph(acc, witnessAccount) {
     var previousEvent;
     _.each(witnessAccount, addEvent);
     return acc;
 
     function addEvent(event) {
-        //console.log(event);
         if (!_.has(acc, event)) {
             // add vertice
             acc[event] = [];
@@ -32,8 +41,6 @@ function addToGraph(acc, witnessAccount) {
 }
 
 //Find starts and ends
-var path = rootEnd();
-
 function rootEnd(){
     var found = {start: [], end:[]};
     _.each(graph, function(e, v){
@@ -58,27 +65,23 @@ function rootEnd(){
 }
 
 //Find all paths between start and end
-var findAllPaths = function(graph, start, end, path){
-    path.push(start);
-    console.log(path);
+var findAllPaths = function(graph, start, end, start_path){
+    var locPath = start_path.slice();
+    locPath.push(start);
     if (start === end){
-        return [path];
+        return [locPath];
     }
     if (!graph.hasOwnProperty(start)){
         return [];
     }
     var paths = [];
-    for (var i=0; i<graph[start].length; i++) {
-        if (graph.hasOwnProperty(start) && path.indexOf(graph[start][i]) == -1){
-            var newPaths = findAllPaths(graph, graph[start][i], end, path);
-            for(var n=0; n<newPaths.length; n++){
-                paths.push(newPaths[n]);
+    for (var i = 0; i < graph[start].length; i++) {
+        if (!_.contains(locPath, graph[start][i])) {
+            var newPath = findAllPaths(graph, graph[start][i], end, locPath);
+            for (var n = 0; n < newPath.length; n++) {
+                paths.push(newPath[n]);
             }
         }
-
     }
     return paths;
 };
-
-console.log(findAllPaths(graph, path.start[0], path.end[0], []));
-//console.log(graph);
