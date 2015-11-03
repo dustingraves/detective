@@ -65,7 +65,7 @@ function rootEnd(){
 }
 
 //Find all paths between start and end
-var findAllPaths = function(graph, start, end, start_path){
+function findAllPaths(graph, start, end, start_path){
     var locPath = start_path.slice();
     locPath.push(start);
     if (start === end){
