@@ -9,6 +9,7 @@ describe('addToGraph.js', function(){
     var testArray = [["test1","test2"],["test2","test3"]];
     var test = {};
     var testObj = {};
+
     beforeEach(function(){
         test = {};
         testObj = {};
@@ -25,5 +26,9 @@ describe('addToGraph.js', function(){
             graph.addToGraph(testObj, testArray[0]);
             test.calledAddEvent.should.be.true();
         });
+    });
+
+    describe('internal.addEvent', function(){
+
     });
 });

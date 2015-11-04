@@ -18,10 +18,7 @@ exports.rootEnd = function(graph){
     });
 
     return found;
-
-
 };
-
 
 internal.checkStart = function(v) {
     var start = true;
@@ -31,4 +28,4 @@ internal.checkStart = function(v) {
         }
     });
     return start;
-}
+};
