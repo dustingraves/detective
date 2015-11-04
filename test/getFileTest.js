@@ -6,7 +6,7 @@ var should = require('should');
 var fsReal = require('fs');
 
 
-describe('getFile', function(){
+describe('getFile.js', function(){
 
     describe('#processArgs', function(){
 

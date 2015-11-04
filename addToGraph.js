@@ -21,4 +21,4 @@ internal.addEvent = function(event) {
         internal.acc[internal.previousEvent].push(event);
     }
     internal.previousEvent = event;
-}
+};
