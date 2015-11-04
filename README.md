@@ -1,3 +1,3 @@
 # detective
-npm install
-node app.js {FILENAME}
+1. npm install
+2. node app.js *sample/events.js*
