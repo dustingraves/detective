@@ -3,31 +3,31 @@
  */
 var getFile = require('./getFile');
 var _ = require('underscore');
-var investigation = getFile.processArgs(process);
 var addToGraph = require('./addToGraph').addToGraph;
 var getStartAndEnd = require('./getStartsAndEnds').rootEnd;
 var findAllPaths = require('./findAllPaths').findAllPaths;
 
 var internal = exports.internal = {};
+internal.investigation = getFile.processArgs(process);
 
 //Build Graph
-var graph = _.reduce(investigation, addToGraph, {});
+internal.graph = _.reduce(internal.investigation, addToGraph, {});
 
 //Find start and end vertices
-var path = getStartAndEnd(graph);
+internal.path = getStartAndEnd(internal.graph);
 
-paths = [];
+internal.paths = [];
 //Follow each start to each end
-_.each(path.start, function(start){
-    _.each(path.end, function(end){
-        var out = findAllPaths(graph, start, end, []);
+_.each(internal.path.start, function(start){
+    _.each(internal.path.end, function(end){
+        var out = findAllPaths(internal.graph, start, end, []);
         _.each(out, function(out){
-            paths.push(out);
+            internal.paths.push(out);
         })
     })
 });
 
-console.log(paths);
+console.log(internal.paths);
 
 
 
