@@ -8,5 +8,13 @@ exports.processArgs = function (process)
         console.log('Usage: node ' + argv[1] + ' FILENAME');
         process.exit(1);
     }
-    return JSON.parse(fs.readFileSync(filename, 'utf-8'));
+    //console.log(process.cwd());
+
+    try{
+        var output = fs.readFileSync(filename, 'utf-8');
+    }
+    catch(ex){
+        throw ('Cannot open file: '+filename+", "+ex);
+    }
+    return JSON.parse(output);
 };
