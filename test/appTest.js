@@ -7,8 +7,8 @@ var _ = require('underscore');
 
 describe('app', function(){
     describe('#addToGraph', function(){
-        addToGraph = mock('../lib/appPlugins/starbucks/plugin', {}, require);
-        it('Should ', function(){
+        var addToGraph = mock('./addToGraph', {}, require);
+        it('Should return graph of multi-dimensional arrays', function(){
 
 
         });
