@@ -5,21 +5,37 @@ var _ = require('underscore');
 var internal = exports.internal = {};
 
 exports.addToGraph = function(acc, witnessAccount) {
-    internal.previousEvent = null;
-    internal.acc = acc;
-    _.each(witnessAccount, internal.addEvent);
+
+    var previousEvent;
+    _.each(witnessAccount, addEvent);
     return acc;
 
+    function addEvent(event) {
+
+        if (!_.has(acc.graph, event)) {
+            // add vertice
+            acc.graph[event] = [];
+        }
+
+        if (previousEvent) {
+            // add edge
+            acc.graph[previousEvent].push(event);
+        }
+
+        if(!previousEvent && acc.seenS.indexOf(event) === -1){
+            //add start node
+            acc.start.push(event);
+        }
+
+        if(!previousEvent && acc.seenE.length>0){
+            //add end node
+            acc.end.push(acc.seenE[acc.seenE.length-1]);
+        }
+
+        acc.seenE.push(event);
+        acc.seenS.push(event);
+        previousEvent = event;
+    }
 };
 
-internal.addEvent = function(event) {
-    if (!_.has(internal.acc, event)) {
-        // add vertice
-        internal.acc[event] = [];
-    }
-    if (internal.previousEvent) {
-        // add edge
-        internal.acc[internal.previousEvent].push(event);
-    }
-    internal.previousEvent = event;
-};
+
