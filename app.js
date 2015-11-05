@@ -11,6 +11,7 @@ internal.investigation = getFile.processArgs(process);
 
 //Build Graph
 internal.graph = _.reduce(internal.investigation, addToGraph, {start:[],end:[],graph:{}, seenS: [], seenE:[]});
+internal.graph.end = _.keys(_.pick(internal.graph.graph, function(value) { return _.isEmpty(value); }));
 
 internal.paths = [];
 

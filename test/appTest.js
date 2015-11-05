@@ -32,33 +32,32 @@ describe('app.js', function(){
             }
         }, require);
 
-        it('Should be an object with mapped values', function(){
-            app.internal.graph.test1.should.eql(['test2']);
-            app.internal.graph.test2.should.eql(['test3']);
-            app.internal.graph.test3.should.eql([]);
+        it('Should be an object with mapped values', function(done){
+            app.internal.graph.graph.test1.should.eql(['test2']);
+            app.internal.graph.graph.test2.should.eql(['test3']);
+            app.internal.graph.graph.test3.should.eql([]);
+            done();
         });
     });
 
     describe('internal.path', function(){
 
-        var startEndObj = {
-            start: ['test1'],
-            end: ['test3']
-        };
+        //var startEndObj = {
+        //    start: ['test1'],
+        //    end: ['test3']
+        //};
+
 
         var app = mock('../app.js', {
             "../getFile.js":{
                 processArgs: function(){return [['test1','test2'],['test2','test3']];}
-            },
-            "../getStartsAndEnds.js":{
-                rootEnd: function(){return startEndObj;}
             }
         }, require);
 
         it('Should contain objects of arrays for starts and ends', function(done){
-            app.internal.path.should.eql(startEndObj);
-            app.internal.path.should.have.property('start');
-            app.internal.path.should.have.property('end');
+            //app.internal.graph.should.eql(startEndObj);
+            app.internal.graph.should.have.property('start');
+            app.internal.graph.should.have.property('end');
             done();
         });
     });
@@ -73,9 +72,6 @@ describe('app.js', function(){
         var app = mock('../app.js', {
             "../getFile.js":{
                 processArgs: function(){return [['test1','test2'],['test2','test3']];}
-            },
-            "../getStartsAndEnds.js":{
-                rootEnd: function(){return startEndObj;}
             }
         }, require);
 

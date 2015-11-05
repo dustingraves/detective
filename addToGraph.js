@@ -8,6 +8,7 @@ exports.addToGraph = function(acc, witnessAccount) {
 
     var previousEvent;
     _.each(witnessAccount, addEvent);
+    //console.log(acc);
     return acc;
 
     function addEvent(event) {
@@ -25,11 +26,6 @@ exports.addToGraph = function(acc, witnessAccount) {
         if(!previousEvent && acc.seenS.indexOf(event) === -1){
             //add start node
             acc.start.push(event);
-        }
-
-        if(!previousEvent && acc.seenE.length>0){
-            //add end node
-            acc.end.push(acc.seenE[acc.seenE.length-1]);
         }
 
         acc.seenE.push(event);
