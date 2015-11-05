@@ -11,8 +11,8 @@ int.investigation = getFile.processArgs(process);
 
 //Build Graph
 int.graph = _.reduce(int.investigation, addToGraph, {start:[],end:[],graph:{}, seenS: [], seenE:[]});
-int.graph.end = _.keys(_.pick(int.graph.graph, function(value) { return _.isEmpty(value); }));
 
+//Init empty paths collection
 int.paths = [];
 
 //Follow each start to each end
@@ -24,5 +24,6 @@ _.each(int.graph.start, function(start){
         })
     })
 });
+
 
 console.log(int.paths);
