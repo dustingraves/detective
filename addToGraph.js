@@ -2,7 +2,6 @@
  * Created by dusting on 11/4/15.
  */
 var _ = require('underscore');
-var internal = exports.internal = {};
 
 exports.addToGraph = function(acc, witnessAccount) {
 
@@ -42,5 +41,3 @@ exports.addToGraph = function(acc, witnessAccount) {
         previousEvent = event;
     }
 };
-
-

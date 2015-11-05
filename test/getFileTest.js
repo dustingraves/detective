@@ -3,8 +3,6 @@
  */
 var mock = require('mock');
 var should = require('should');
-var fsReal = require('fs');
-
 
 describe('getFile.js', function(){
 
