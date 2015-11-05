@@ -56,8 +56,31 @@ describe('app.js', function(){
         }, require);
 
         it('Should contain objects of arrays for starts and ends', function(done){
+            app.internal.path.should.eql(startEndObj);
             app.internal.path.should.have.property('start');
             app.internal.path.should.have.property('end');
+            done();
+        });
+    });
+
+    describe('internal.out', function(){
+
+        var startEndObj = {
+            start: ['test1'],
+            end: ['test3']
+        };
+
+        var app = mock('../app.js', {
+            "../getFile.js":{
+                processArgs: function(){return [['test1','test2'],['test2','test3']];}
+            },
+            "../getStartsAndEnds.js":{
+                rootEnd: function(){return startEndObj;}
+            }
+        }, require);
+
+        it('Should output paths from start to end', function(done){
+            app.internal.out.should.eql([[ 'test1', 'test2', 'test3' ]]);
             done();
         });
     });

@@ -20,17 +20,11 @@ internal.paths = [];
 //Follow each start to each end
 _.each(internal.path.start, function(start){
     _.each(internal.path.end, function(end){
-        var out = findAllPaths(internal.graph, start, end, []);
-        _.each(out, function(out){
+        internal.out = findAllPaths(internal.graph, start, end, []);
+        _.each(internal.out, function(out){
             internal.paths.push(out);
         })
     })
 });
 
 console.log(internal.paths);
-
-
-
-
-
-

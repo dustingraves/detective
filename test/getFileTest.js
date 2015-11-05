@@ -8,7 +8,7 @@ var fsReal = require('fs');
 
 describe('getFile.js', function(){
 
-    describe('#processArgs', function(){
+    describe('processArgs()', function(){
 
         var test = {};
         var getFile = mock('../getFile.js', {}, require);
