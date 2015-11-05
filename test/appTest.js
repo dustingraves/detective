@@ -51,16 +51,70 @@ describe('app.js', function(){
         });
     });
 
-    describe('internal.out', function(){
+    describe('internal.out', function() {
 
-        var app = mock('../app.js', {
-            "../getFile.js":{
-                processArgs: function(){return [['test1','test2'],['test2','test3']];}
-            }
-        }, require);
+        it('Should perform full merge', function (done) {
+            var testArray = [['test1', 'test2'], ['test2', 'test3']];
+            var app = mock('../app.js', {
+                "../getFile.js": {
+                    processArgs: function () {
+                        return testArray;
+                    }
+                }
+            }, require);
 
-        it('Should output paths from start to end', function(done){
-            app.internal.out.should.eql([[ 'test1', 'test2', 'test3' ]]);
+            app.internal.out.should.eql([['test1', 'test2', 'test3']]);
+            done();
+        });
+    });
+
+    describe('internal.paths', function(){
+        it('Should perform full merge', function (done) {
+            var testArray = [['test1', 'test2'], ['test2', 'test3']];
+            var app = mock('../app.js', {
+                "../getFile.js": {
+                    processArgs: function () {
+                        return testArray;
+                    }
+                }
+            }, require);
+
+            app.internal.out.should.eql([['test1', 'test2', 'test3']]);
+            done();
+        });
+        it('Should perform partial merge', function(done){
+            var testArray =[
+                ["test1", "test9", "test3", "test4"],
+                ["test1", "test8", "test3"]
+            ];
+            var app = mock('../app.js', {
+                "../getFile.js":{
+                    processArgs: function(){return testArray;}
+                }
+            }, require);
+            app.internal.paths.should.eql([
+                [ 'test1', 'test9', 'test3', 'test4' ],
+                [ 'test1', 'test8', 'test3', 'test4' ]
+            ]);
+            done();
+        });
+
+        it('Should not merge on unique paths', function(done){
+            var testArray =[
+                ["test1", "test9", "test3"],
+                ["test7", "test8", "test3"],
+                ["test1", "test6"]
+            ];
+            var app = mock('../app.js', {
+                "../getFile.js":{
+                    processArgs: function(){return testArray;}
+                }
+            }, require);
+            app.internal.paths.should.eql([
+                ["test1", "test9", "test3"],
+                ["test1", "test6"],
+                ["test7", "test8", "test3"]
+            ]);
             done();
         });
     });
