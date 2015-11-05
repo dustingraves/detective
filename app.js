@@ -25,5 +25,7 @@ _.each(int.graph.start, function(start){
     })
 });
 
+if(process.env.NODE_ENV != "test"){
+    console.log(int.paths);
+}
 
-console.log(int.paths);
