@@ -10,7 +10,7 @@ describe('addToGraph.js', function(){
     var test = {};
     var testObj = {};
     var validate = { start: [ 'test1' ],
-        end: [],
+        end: [ 'test2' ],
         graph: { test1: [ 'test2' ], test2: [] },
         seenS: [ 'test1', 'test2' ],
         seenE: [ 'test1', 'test2' ] };
