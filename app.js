@@ -6,23 +6,23 @@ var _ = require('underscore');
 var addToGraph = require('./addToGraph').addToGraph;
 var findAllPaths = require('./findAllPaths').findAllPaths;
 
-var internal = exports.internal = {};
-internal.investigation = getFile.processArgs(process);
+var int = exports.internal = {};
+int.investigation = getFile.processArgs(process);
 
 //Build Graph
-internal.graph = _.reduce(internal.investigation, addToGraph, {start:[],end:[],graph:{}, seenS: [], seenE:[]});
-internal.graph.end = _.keys(_.pick(internal.graph.graph, function(value) { return _.isEmpty(value); }));
+int.graph = _.reduce(int.investigation, addToGraph, {start:[],end:[],graph:{}, seenS: [], seenE:[]});
+int.graph.end = _.keys(_.pick(int.graph.graph, function(value) { return _.isEmpty(value); }));
 
-internal.paths = [];
+int.paths = [];
 
 //Follow each start to each end
-_.each(internal.graph.start, function(start){
-    _.each(internal.graph.end, function(end){
-        internal.out = findAllPaths(internal.graph.graph, start, end, []);
-        _.each(internal.out, function(out){
-            internal.paths.push(out);
+_.each(int.graph.start, function(start){
+    _.each(int.graph.end, function(end){
+        int.out = findAllPaths(int.graph.graph, start, end, []);
+        _.each(int.out, function(out){
+            int.paths.push(out);
         })
     })
 });
 
-console.log(internal.paths);
+console.log(int.paths);

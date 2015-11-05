@@ -3,7 +3,7 @@
  */
 var _ = require('underscore');
 
-var internal = exports.internal = {};
+var int = exports.internal = {};
 
 //Find all paths between start and end
 exports.findAllPaths = function(graph, start, end, start_path){

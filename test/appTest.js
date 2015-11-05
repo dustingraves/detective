@@ -6,11 +6,7 @@ var should = require('should');
 var _ = require('underscore');
 
 describe('app.js', function(){
-    var testObject = {
-        test1: [ 'test2' ],
-        test2: [ 'test3' ],
-        test3: []
-    };
+
     var testArray = [["test1","test2"],["test2","test3"]];
 
     describe('internal.investigation', function(){
@@ -42,12 +38,6 @@ describe('app.js', function(){
 
     describe('internal.path', function(){
 
-        //var startEndObj = {
-        //    start: ['test1'],
-        //    end: ['test3']
-        //};
-
-
         var app = mock('../app.js', {
             "../getFile.js":{
                 processArgs: function(){return [['test1','test2'],['test2','test3']];}
@@ -55,7 +45,6 @@ describe('app.js', function(){
         }, require);
 
         it('Should contain objects of arrays for starts and ends', function(done){
-            //app.internal.graph.should.eql(startEndObj);
             app.internal.graph.should.have.property('start');
             app.internal.graph.should.have.property('end');
             done();
@@ -63,11 +52,6 @@ describe('app.js', function(){
     });
 
     describe('internal.out', function(){
-
-        var startEndObj = {
-            start: ['test1'],
-            end: ['test3']
-        };
 
         var app = mock('../app.js', {
             "../getFile.js":{

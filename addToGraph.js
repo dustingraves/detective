@@ -2,13 +2,11 @@
  * Created by dusting on 11/4/15.
  */
 var _ = require('underscore');
-var internal = exports.internal = {};
 
 exports.addToGraph = function(acc, witnessAccount) {
 
     var previousEvent;
     _.each(witnessAccount, addEvent);
-    //console.log(acc);
     return acc;
 
     function addEvent(event) {
