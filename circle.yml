@@ -3,4 +3,4 @@ machine:
     version: 0.12.1
 test:
   post:
-    - node app.js samples/events.json
+    - ./test/test.sh
