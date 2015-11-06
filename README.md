@@ -1,5 +1,6 @@
 
-[![Circle CI](https://circleci.com/gh/dustingraves/detective.png?circle-token=:shield)](https://circleci.com/gh/dustingraves/detective)
+[![Circle CI](https://circleci.com/gh/dustingraves/detective.png?style=shield)](https://circleci.com/gh/dustingraves/detective)
+
 # Detective
 
 ###This app will take a file with an array of arrays and return the minimum unique paths
